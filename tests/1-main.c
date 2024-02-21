@@ -1,56 +1,74 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "../sort.h"
 
 /**
- * create_listint - Creates a doubly linked list from an array of integers
- *
- * @array: Array to convert to a doubly linked list
- * @size: Size of the array
- *
- * Return: Pointer to the first element of the created list. NULL on failure
+ * create_node - Creates a new node with given value
+ * @n: Value for the new node
+ * Return: A pointer to the newly created node
  */
-listint_t *create_listint(const int *array, size_t size)
+listint_t *create_node(int n)
 {
-	listint_t *list;
-	listint_t *node;
-	int *tmp;
-
-	list = NULL;
-	while (size--)
-	{
-		node = malloc(sizeof(*node));
-		if (!node)
-			return (NULL);
-		tmp = (int *)&node->n;
-		*tmp = array[size];
-		node->next = list;
-		node->prev = NULL;
-		list = node;
-		if (list->next)
-			list->next->prev = list;
-	}
-	return (list);
+    listint_t *new_node = malloc(sizeof(listint_t));
+    if (new_node == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+    new_node->n = n;
+    new_node->prev = NULL;
+    new_node->next = NULL;
+    return new_node;
 }
 
 /**
- * main - Entry point
+ * free_list - Frees a doubly linked list
+ * @head: Pointer to the head of the list
+ */
+void free_list(listint_t *head)
+{
+    listint_t *temp;
+    while (head != NULL)
+    {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+/**
+ * main - Test the insertion_sort_list function
  *
  * Return: Always 0
  */
 int main(void)
 {
-    listint_t *list;
-    int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
-    size_t n = sizeof(array) / sizeof(array[0]);
+    listint_t *head = NULL;
+    
+    // Create a doubly linked list
+    listint_t *node1 = create_node(4);
+    listint_t *node2 = create_node(2);
+    listint_t *node3 = create_node(1);
+    listint_t *node4 = create_node(3);
+    
+    head = node1;
+    node1->next = node2;
+    node2->prev = node1;
+    node2->next = node3;
+    node3->prev = node2;
+    node3->next = node4;
+    node4->prev = node3;
+    
+    printf("Original list: ");
+    print_list(head);
 
-    list = create_listint(array, n);
-    if (!list)
-        return (1);
-    print_list(list);
-    printf("\n");
-    insertion_sort_list(&list);
-    printf("\n");
-    print_list(list);
+    // Sort the list using insertion sort
+    insertion_sort_list(&head);
+
+    printf("Sorted list: ");
+    print_list(head);
+
+    // Free the memory allocated for the list
+    free_list(head);
+
     return (0);
 }
