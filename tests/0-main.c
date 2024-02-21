@@ -1,21 +1,22 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "../sort.h"
+#include "sort.h"
 
 /**
- * main - Entry point
+ * main - Test the bubble_sort function
  *
  * Return: Always 0
  */
 int main(void)
 {
-	int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
-	size_t n = sizeof(array) / sizeof(array[0]);
+    int array[] = {64, 34, 25, 12, 22, 11, 90};
+    size_t size = sizeof(array) / sizeof(array[0]);
+    
+    printf("Original array: ");
+    print_array(array, size);
 
-	print_array(array, n);
-	printf("\n");
-	bubble_sort(array, n);
-	printf("\n");
-	print_array(array, n);
-	return (0);
+    bubble_sort(array, size);
+
+    printf("Sorted array: ");
+    print_array(array, size);
+
+    return (0);
 }
