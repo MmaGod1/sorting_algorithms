@@ -12,7 +12,7 @@ listint_t *create_node(int n)
     if (new_node == NULL)
     {
         fprintf(stderr, "Memory allocation failed\n");
-        exit(EXIT_FAILURE);
+        return (NULL);
     }
     new_node->n = n;
     new_node->prev = NULL;
