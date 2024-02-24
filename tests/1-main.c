@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "sort.h"
+#include "../sort.h"
 
 /* Your print_array and print_list functions */
 
