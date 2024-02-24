@@ -1,32 +1,38 @@
-#include "../sort.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "sort.h"
+
+/* Your print_array and print_list functions */
 
 int main(void)
 {
     listint_t *list = NULL;
+    listint_t *new_node;
 
-    /* Create a linked list with elements: 4 <-> 2 <-> 1 <-> 3 */
-    list = create_node(4);
-    list->next = create_node(2);
-    list->next->prev = list;
-    list->next->next = create_node(1);
-    list->next->next->prev = list->next;
-    list->next->next->next = create_node(3);
-    list->next->next->next->prev = list->next->next;
-
-    printf("Original list:\n");
-    print_list(list);
-
-    printf("\nSorting the list:\n");
-    insertion_sort_list(&list);
-    print_list(list);
-
-    /* Free the memory allocated for the list */
-    while (list != NULL)
-    {
-        listint_t *tmp = list;
-        list = list->next;
-        free(tmp);
+    /* Create a linked list: 5 <-> 3 <-> 8 <-> 2 <-> 1 */
+    int values[] = {5, 3, 8, 2, 1};
+    size_t num_values = sizeof(values) / sizeof(values[0]);
+    
+    /* Populate the linked list */
+    for (size_t i = 0; i < num_values; i++) {
+        new_node = malloc(sizeof(listint_t));
+        if (new_node == NULL)
+            return (1);
+        new_node->n = values[i];
+        new_node->prev = NULL;
+        new_node->next = list;
+        if (list != NULL)
+            list->prev = new_node;
+        list = new_node;
     }
+
+    printf("Original list: ");
+    print_list(list);
+
+    insertion_sort_list(&list);
+
+    printf("Sorted list: ");
+    print_list(list);
 
     return (0);
 }
