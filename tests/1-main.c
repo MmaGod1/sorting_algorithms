@@ -38,7 +38,7 @@ int main(void)
     insertion_sort_list(&list);
     print_list(list);
 
-    // Free the memory allocated for the list
+    /* Free the memory allocated for the list */
     while (list != NULL)
     {
         listint_t *tmp = list;
