@@ -22,7 +22,7 @@ int main(void)
 {
     listint_t *list = NULL;
 
-    // Create a linked list with elements: 4 <-> 2 <-> 1 <-> 3
+    /* Create a linked list with elements: 4 <-> 2 <-> 1 <-> 3 */
     list = create_node(4);
     list->next = create_node(2);
     list->next->prev = list;
