@@ -9,32 +9,32 @@
  * @size: Number of elements in the array
  * Return: The partition index
  */
-void lomuto_partition(int *array, int low, int high, size_t size)
+int lomuto_partition(int *array, int low, int high, size_t size)
 {
-	int pivot = array[high];
-	int i = low - 1;
-	int temp;
+    int pivot = array[high]; /* Choose the last element as the pivot */
+    int i = low - 1; /* Index of smaller element */
 
-	for (int j = low; j <= high - 1; j++)
-	{
-		if (array[j] < pivot)
-		{
-			i++;
-			/* Swap array[i] and array[j] */
-			temp = array[i];
-			array[i] = array[j];
-			array[j] = temp;
-			print_array(array, size);
-		}
-	}
-	temp = array[i + 1];
-	array[i + 1] = array[high];
-	array[high] = temp;
-	print_array(array, size);
+    for (int j = low; j <= high - 1; j++)
+    {
+        if (array[j] < pivot)
+        {
+            i++;
+            /* Swap array[i] and array[j] */
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+            print_array(array, size); /* Print array after swapping */
+        }
+    }
+    /* Swap array[i + 1] and array[high] to place the pivot in the correct position */
+    int temp = array[i + 1];
+    array[i + 1] = array[high];
+    array[high] = temp;
+    print_array(array, size); /* Print array after partitioning */
 
-	return (i + 1);
+    /* Return the partition index */
+    return i + 1;
 }
-
 
 void quick_sort_recursive(int *array, int low, int high, size_t size)
 {
