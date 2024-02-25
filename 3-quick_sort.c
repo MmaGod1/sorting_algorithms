@@ -10,7 +10,6 @@
  * Return: The partition index
  */
 int lomuto_partition(int *array, int low, int high, size_t size)
-int lomuto_partition(int *array, int low, int high, size_t size)
 {
 	int pivot = array[high];
 	int i = low - 1, j;
