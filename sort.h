@@ -42,6 +42,7 @@ void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
 listint_t *create_node(const int *array, size_t size);
 void free_list(listint_t *head);
+void quick_sort_recursive(int *array, int low, int high, size_t size);
 void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
 void shell_sort(int *array, size_t size);

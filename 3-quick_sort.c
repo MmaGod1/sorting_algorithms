@@ -14,7 +14,7 @@ int lomuto_partition(int *array, int low, int high, size_t size)
     /* Choose the pivot element */
     int pivot = array[high];
     int i = low - 1;
-    int j;
+    int j, tmp;
 
     /* Partition the array */
     for (j = low; j <= high - 1; j++)
@@ -23,7 +23,7 @@ int lomuto_partition(int *array, int low, int high, size_t size)
         {
             i++;
             /* Swap elements */
-            int tmp = array[i];
+            tmp = array[i];
             array[i] = array[j];
             array[j] = tmp;
             /* Print array after each swap */
@@ -32,7 +32,7 @@ int lomuto_partition(int *array, int low, int high, size_t size)
     }
     
     /* Swap pivot element to its correct position */
-    int tmp = array[i + 1];
+    tmp = array[i + 1];
     array[i + 1] = array[high];
     array[high] = tmp;
     /* Print array after placing pivot in its correct position */
@@ -48,8 +48,7 @@ k sort
  * @high: The ending index of the partition
  * @size: Number of elements in the array
  */
-void quick_sort_recursive(int *array, int low, int high, size_
-t size)
+void quick_sort_recursive(int *array, int low, int high, size_t size)
 {
         int pi;
 
