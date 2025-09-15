@@ -12,14 +12,64 @@ void swap_nodes(listint_t **list, listint_t *left, listint_t *right)
 		left->prev->next = right;
 	else
 		*list = right;
-
 	if (right->next)
 		right->next->prev = left;
-
 	right->prev = left->prev;
 	left->next = right->next;
 	right->next = left;
 	left->prev = right;
+}
+
+/**
+ * forward_pass - Perform forward pass of cocktail sort
+ * @list: pointer to the head of the list
+ * @start: starting node for the pass
+ * @end: ending node for the pass
+ * Return: 1 if swap occurred, 0 otherwise
+ */
+int forward_pass(listint_t **list, listint_t *start, listint_t *end)
+{
+	int swapped = 0;
+	listint_t *current = start;
+
+	while (current->next != end)
+	{
+		if (current->n > current->next->n)
+		{
+			swap_nodes(list, current, current->next);
+			swapped = 1;
+			print_list(*list);
+		}
+		else
+			current = current->next;
+	}
+	return (swapped);
+}
+
+/**
+ * backward_pass - Perform backward pass of cocktail sort
+ * @list: pointer to the head of the list
+ * @start: starting node for the pass
+ * @end: ending node for the pass
+ * Return: 1 if swap occurred, 0 otherwise
+ */
+int backward_pass(listint_t **list, listint_t *start, listint_t *end)
+{
+	int swapped = 0;
+	listint_t *current = end;
+
+	while (current->prev && current->prev != start->prev)
+	{
+		if (current->prev->n > current->n)
+		{
+			swap_nodes(list, current->prev, current);
+			swapped = 1;
+			print_list(*list);
+		}
+		else
+			current = current->prev;
+	}
+	return (swapped);
 }
 
 /**
@@ -33,44 +83,20 @@ void cocktail_sort_list(listint_t **list)
 
 	if (!list || !*list || !(*list)->next)
 		return;
-
 	start = *list;
 	end = NULL;
 	swapped = 1;
-
 	while (swapped)
 	{
-		swapped = 0;
-
+		swapped = forward_pass(list, start, end);
 		current = start;
 		while (current->next != end)
-		{
-			if (current->n > current->next->n)
-			{
-				swap_nodes(list, current, current->next);
-				swapped = 1;
-				print_list(*list);
-			}
-			else
-				current = current->next;
-		}
+			current = current->next;
 		end = current;
-
 		if (!swapped)
 			break;
-
-		swapped = 0;
-		current = end->prev;
-		while (current != start->prev)
-		{
-			if (current->n > current->next->n)
-			{
-				swap_nodes(list, current, current->next);
-				swapped = 1;
-				print_list(*list);
-			}
-			current = current->prev;
-		}
-		start = (*list);
+		swapped = backward_pass(list, start, end);
+		while (start->prev)
+			start = start->prev;
 	}
 }
