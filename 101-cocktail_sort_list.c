@@ -32,7 +32,7 @@ int forward_pass(listint_t **list, listint_t *start, listint_t *end)
 	int swapped = 0;
 	listint_t *current = start;
 
-	while (current && current->next && current->next != end)
+	while (current && current->next != end)
 	{
 		if (current->n > current->next->n)
 		{
@@ -58,7 +58,7 @@ int backward_pass(listint_t **list, listint_t *start, listint_t *end)
 	int swapped = 0;
 	listint_t *current = end;
 
-	while (current && current->prev && current->prev != start->prev)
+	while (current && current->prev && current != start)
 	{
 		if (current->prev->n > current->n)
 		{
@@ -83,29 +83,18 @@ void cocktail_sort_list(listint_t **list)
 
 	if (!list || !*list || !(*list)->next)
 		return;
-
 	start = *list;
 	end = NULL;
-
 	do {
-		/* Forward pass: move largest to end */
 		forward_swapped = forward_pass(list, start, end);
-
-		/* Find the new end (last unsorted element) */
 		current = start;
-		while (current && current->next && current->next != end)
+		while (current && current->next != end)
 			current = current->next;
 		end = current->next;
-
 		if (!forward_swapped)
 			break;
-
-		/* Backward pass: move smallest to start */
 		backward_swapped = backward_pass(list, start, end);
-
-		/* Advance start to next unsorted element */
-		if (start)
+		if (backward_swapped)
 			start = start->next;
-
 	} while (forward_swapped || backward_swapped);
 }
