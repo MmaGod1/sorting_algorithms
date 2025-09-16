@@ -43,7 +43,7 @@ int forward_pass(listint_t **list, listint_t *start, listint_t *end)
 		else
 			current = current->next;
 	}
-	return swapped;
+	return (swapped);
 }
 
 /**
@@ -69,7 +69,7 @@ int backward_pass(listint_t **list, listint_t *start, listint_t *end)
 		else
 			current = current->prev;
 	}
-	return swapped;
+	return (swapped);
 }
 
 /**
@@ -79,21 +79,21 @@ int backward_pass(listint_t **list, listint_t *start, listint_t *end)
 void cocktail_sort_list(listint_t **list)
 {
 	int forward_swapped, backward_swapped;
-	listint_t *start, *end;
+	listint_t *start, *end, *current;
 
 	if (!list || !*list || !(*list)->next)
 		return;
-
 	start = *list;
 	end = NULL;
-
 	do {
 		forward_swapped = forward_pass(list, start, end);
+		current = start;
+		while (current && current->next != end)
+			current = current->next;
+		end = current;
 		if (!forward_swapped)
 			break;
-		end = end ? end->prev : NULL;
-
 		backward_swapped = backward_pass(list, start, end);
-		start = start->next;
+		start = *list;
 	} while (forward_swapped || backward_swapped);
 }
