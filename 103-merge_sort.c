@@ -1,27 +1,6 @@
 #include <stdio.h>
 
 /**
- * print_array - Prints an array of integers
- *
- * @array: The array to be printed
- * @size: The number of elements in @array
- *
- * Return: Nothing
- */
-void print_array(const int *array, size_t size)
-{
-	size_t i;
-
-	for (i = 0; i < size; i++)
-	{
-		if (i > 0)
-			printf(", ");
-		printf("%d", array[i]);
-	}
-	printf("\n");
-}
-
-/**
  * merge - Merges two sorted sub-arrays into one sorted array
  *
  * @array: The array containing the sub-arrays
@@ -72,10 +51,12 @@ void merge(int *array, int *temp, size_t left, size_t mid, size_t right)
  */
 void merge_sort_recursive(int *array, int *temp, size_t left, size_t right)
 {
+	size_t mid;
+
 	if (right - left <= 1)
 		return;
 
-	size_t mid = left + (right - left) / 2;
+	mid = left + (right - left) / 2;
 
 	merge_sort_recursive(array, temp, left, mid);
 	merge_sort_recursive(array, temp, mid, right);
