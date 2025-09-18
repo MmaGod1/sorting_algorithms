@@ -2,11 +2,9 @@
 #include <string.h>
 
 /**
- * card_value - Converts a card's string value
- *		("Ace", "2", ..., "King") to an integer rank.
- * @card: Pointer to the card structure.
- *
- * Return: Integer rank of the card (Ace = 0, 2 = 1, ..., King = 12).
+ * card_value - Get the numeric value of a playing card.
+ * @value: The string representing the card's value (e.g. "Ace", ..., "King").
+ * Return: Numeric rank of the card (Ace = 0, 2 = 1, ..., King = 12).
  */
 int card_value(const char *value)
 {
@@ -23,13 +21,16 @@ int card_value(const char *value)
 }
 
 /**
- * compare_cards - Comparison function for two deck nodes, used with qsort.
+ * compare_cards - Compare two cards for sorting.
  * @a: Pointer to the first deck node.
  * @b: Pointer to the second deck node.
  *
- * Return: Negative if @a comes before @b, positive if after, 0 if equal.
- *         Cards are ordered first by kind (Spades, Hearts, Clubs, Diamonds),
- *         then by value (Ace through King).
+ * Return: Negative value if @a should come before @b,
+ *         positive value if @a should come after @b,
+ *         or 0 if they are equal.
+ *
+ * Description: Sorts primarily by kind (Spade, Heart, Club, Diamond),
+ * then by value (Ace through King).
  */
 int compare_cards(const void *a, const void *b)
 {
@@ -45,13 +46,11 @@ int compare_cards(const void *a, const void *b)
 }
 
 /**
- * sort_deck - Sorts a deck of 52 cards in ascending order.
- * @deck: Double pointer to the head of the doubly linked list of deck nodes.
+ * sort_deck - Sort a 52-card deck of playing cards.
+ * @deck: Double pointer to the head of the deck.
  *
- * Description: The deck is sorted from Ace to King within each suit,
- *              and suits are ordered Spades, Hearts, Clubs, Diamonds.
- *              The function uses qsort internally to sort an array of
- *              pointers to the deck nodes, then relinks the list.
+ * Description: Sorts the deck in ascending order, from Ace to King,
+ * with suits ordered Spades → Hearts → Clubs → Diamonds.
  */
 void sort_deck(deck_node_t **deck)
 {
