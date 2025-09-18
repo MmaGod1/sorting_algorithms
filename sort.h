@@ -66,8 +66,5 @@ int get_max(int *array, size_t size);
 void counting_sort_radix(int *array, size_t size, int exp);
 void radix_sort(int *array, size_t size);
 void swap_ints(int *a, int *b);
-void bitonic_merge(int *array, size_t size, size_t start, size_t seq, int dir);
-void bitonic_seq(int *array, size_t size, size_t start, size_t seq, int dir);
-void bitonic_sort(int *array, size_t size);
 
 #endif /* SORT_H */
