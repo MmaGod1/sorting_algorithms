@@ -57,6 +57,10 @@ void quick_sort_hoare(int *array, size_t size);
 int forward_pass(listint_t **list, listint_t *start, listint_t *end);
 int backward_pass(listint_t **list, listint_t *start, listint_t *end);
 void cocktail_sort_list(listint_t **list);
+void merge(int *array, int *temp, size_t left, size_t mid, size_t right);
+void merge_sort_recursive(int *array, int *temp, size_t left, size_t right);
 void merge_sort(int *array, size_t size);
+void sift_down(int *array, size_t size, size_t n, size_t i);
+void heap_sort(int *array, size_t size);
 
 #endif /* SORT_H */
