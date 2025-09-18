@@ -62,5 +62,9 @@ void merge_sort_recursive(int *array, int *temp, size_t left, size_t right);
 void merge_sort(int *array, size_t size);
 void sift_down(int *array, size_t size, size_t n, size_t i);
 void heap_sort(int *array, size_t size);
+int get_max(int *array, size_t size);
+void counting_sort_radix(int *array, size_t size, int exp);
+void radix_sort(int *array, size_t size);
+
 
 #endif /* SORT_H */
