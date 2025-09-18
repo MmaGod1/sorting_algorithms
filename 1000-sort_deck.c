@@ -1,4 +1,5 @@
 #include "deck.h"
+#include <stdlib.h>
 #include <string.h>
 
 /* Map card string value to integer 0–12 */
@@ -68,9 +69,4 @@ void sort_deck(deck_node_t **deck)
 
     *deck = array[0]; /* Update head */
     free(array);
-}		}
-
-		if (i == count - 1)
-			nodes[i]->next = NULL;
-	}
 }
