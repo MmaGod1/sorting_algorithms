@@ -54,17 +54,9 @@ void bitonic_seq(int *array, size_t size, size_t start, size_t seq, int dir)
 	{
 		size_t k = seq / 2;
 
-		printf("Merging [%lu/%lu] (%s):\n", seq, size,
-				dir ? "UP" : "DOWN");
-		print_array(array + start, seq);
-
 		bitonic_seq(array, size, start, k, 1);
 		bitonic_seq(array, size, start + k, k, 0);
 		bitonic_merge(array, size, start, seq, dir);
-
-		printf("Result [%lu/%lu] (%s):\n", seq, size,
-				dir ? "UP" : "DOWN");
-		print_array(array + start, seq);
 	}
 }
 
