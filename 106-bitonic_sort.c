@@ -69,7 +69,8 @@ void bitonic_seq(int *array, size_t size, size_t start, size_t seq, int dir)
 }
 
 /**
- * bitonic_sort - Sorts an array of integers in ascending order using Bitonic sort
+ * bitonic_sort - Sorts an array of integers in ascending
+ *			order using Bitonic sort
  * @array: array to sort
  * @size: size of the array
  */
